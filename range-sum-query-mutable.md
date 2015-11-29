@@ -1,51 +1,17 @@
-```java
+```
+Range Sum Query - Mutable My Submissions Question
+Total Accepted: 1989 Total Submissions: 13671 Difficulty: Medium
+Given an integer array nums, find the sum of the elements between indices i and j (i ≤ j), inclusive.
 
-int a[100005],b[100005];
-int n;
-class NumArray {
-public:
-    void updateValue(int x, int val) {
-        for(int nx = x; nx <= n; nx += nx&(-nx)) {
-            a[nx] += val;
-        }
-    }
-    int getValue(int x) {
-        if (x == 0) return 0;
-        int sum = 0;
-        for (int nx = x; nx > 0; nx -= nx&(-nx)) {
-            sum += a[nx];
-        }
-        return sum;
-    }
-    NumArray(vector<int> &nums) {
-        n = 100000;
-        for (int i = 0; i <= n; ++i) {
-            a[i] = 0;
-        }
-        for (int i = 0; i < nums.size(); ++i) {
-            b[i+1] = nums[i];
-            updateValue(i+1, b[i+1]);
-        }
-    }
+The update(i, val) function modifies nums by updating the element at index i to val.
+Example:
+Given nums = [1, 3, 5]
 
-    void update(int i, int val) {
-        ++i;
-        updateValue(i, -b[i]);
-        b[i] = val;
-        updateValue(i, val);
-    }
-
-    int sumRange(int i, int j) {
-        ++i;++j;
-        return getValue(j) - getValue(i-1);
-    }
-};
-
-
-// Your NumArray object will be instantiated and called as such:
-// NumArray numArray(nums);
-// numArray.sumRange(0, 1);
-// numArray.update(1, 10);
-// numArray.sumRange(1, 2);
-
+sumRange(0, 2) -> 9
+update(1, 2)
+sumRange(0, 2) -> 8
+Note:
+The array is only modifiable by the update function.
+You may assume the number of calls to update and sumRange function is distributed evenly.
+Subscribe to see which companies asked this question
 ```
